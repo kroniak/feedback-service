@@ -1,0 +1,118 @@
+@startuml models
+
+class User {
+  ObjectId id
+  .. Fields ..
+  +string UserName
+  +string Email
+  +Role[] Roles
+  .. Relations ..
+  +ObjectId? Employer
+}
+User *-- Role
+User --> Employer
+
+class Employer {
+  ObjectId id
+  .. Fields ..
+  +string Name
+  +string Department
+  +string Role
+  +string[] TeamsPr1
+  +string[] TeamsPr2
+  .. Relations ..
+  +ObjectId User
+  +ObjectId? Candidate
+}
+Employer --> Candidate
+
+class Candidate {
+  ObjectId id
+  .. Fields ..
+  +string Name
+  +string Position
+  +string CVLink
+}
+
+class PollTemplate {
+  ObjectId id
+  .. Fields ..
+  +string PollName
+  +bool isPrivate
+  +bool isCondidatPoll
+  +PollType PollType
+  .. Relations ..
+  +Question[] Questions
+}
+PollTemplate o-- Question
+
+class Poll {
+  ObjectId id
+  .. Fields ..
+  +DateTime StartDate
+  +DateTime EndDate
+  .. Relations ..
+  +Question[] Questions
+}
+Poll o-- Question
+PollTemplate <|-- Poll
+
+class Question {
+  ObjectId id
+  .. Fields ..
+  +string Title
+  +QType Type
+  +bool isRequired
+  +bool isHasStringAddition
+}
+Question *-- QType
+
+class PollAnswer {
+  ObjectId id
+  .. Fields ..
+  +bool isVisibleToPollSubject
+  .. Relations ..
+  +ObjectId Answerer
+  +ObjectId PollSubject
+  +ObjectId Poll
+  +Answer[] Answers
+}
+PollAnswer o-- Answer
+PollAnswer --> Employer
+PollAnswer --> Poll
+
+class Answer {
+  ObjectId id
+  .. Fields ..
+  +string Title
+  +QType Type
+  +bool isRequired
+  +bool isHasStringAddition
+}
+
+class Direction {
+  ObjectId id
+  .. Fields ..
+  +bool isComplete
+  .. Relations ..
+  +ObjectId Poll
+  +ObjectId To
+}
+Direction --> Employer
+Direction --> Poll
+
+enum QType {
+  Radio
+  String
+  Combo
+  Range
+}
+
+enum Role {
+  Admin
+  User
+  Reviewer
+  Editor
+}
+
+@enduml
