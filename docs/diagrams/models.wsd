@@ -1,10 +1,23 @@
 @startuml models
 
+class IdentityModel {
+  +ObjectId id
+}
+
+IdentityModel <|-- User
+IdentityModel <|-- Employer
+IdentityModel <|-- Candidate
+IdentityModel <|-- Direction
+IdentityModel <|-- PollAnswer
+IdentityModel <|-- PollTemplate
+IdentityModel <|-- Question
+IdentityModel <|-- Answer
+
+
 class User {
-  ObjectId id
   .. Fields ..
   +string UserName
-  +string Email
+  +string HashedPassword
   +Role[] Roles
   .. Relations ..
   +ObjectId? Employer
@@ -13,21 +26,20 @@ User *-- Role
 User --> Employer
 
 class Employer {
-  ObjectId id
   .. Fields ..
-  +string Name
+  +string Fio
   +string Department
-  +string Role
-  +string[] TeamsPr1
-  +string[] TeamsPr2
+  +TeamRole[] TeamRoles
+  +string[] TeamsPriorityFirst
+  +string[] TeamsPrioritySecond
   .. Relations ..
-  +ObjectId User
+  +ObjectId? User
   +ObjectId? Candidate
 }
 Employer --> Candidate
+Employer *-- TeamRole
 
 class Candidate {
-  ObjectId id
   .. Fields ..
   +string Name
   +string Position
@@ -35,68 +47,63 @@ class Candidate {
 }
 
 class PollTemplate {
-  ObjectId id
   .. Fields ..
-  +string PollName
+  +string Title
   +bool isPrivate
   +bool isCandidatePoll
-  +PollType PollType
+  +string PollType
   .. Relations ..
   +Question[] Questions
 }
 PollTemplate o-- Question
 
 class Poll {
-  ObjectId id
   .. Fields ..
   +DateTime StartDate
   +DateTime EndDate
   .. Relations ..
   +Question[] Questions
+  ObjectId Owner
 }
 Poll o-- Question
 PollTemplate <|-- Poll
 
 class Question {
-  ObjectId id
   .. Fields ..
   +string Title
+  +string Description
   +QType Type
+  +Dictionary<int, string> AnswerVariant
   +bool isRequired
   +bool isHasStringAddition
 }
 Question *-- QType
 
 class PollAnswer {
-  ObjectId id
   .. Fields ..
   +bool isVisibleToPollSubject
   .. Relations ..
   +ObjectId Answerer
   +ObjectId PollSubject
   +ObjectId Poll
-  +Answer[] Answers
+  +QuestionAnswer[] Answers
 }
-PollAnswer o-- Answer
+PollAnswer o-- QuestionAnswer
 PollAnswer --> Employer
 PollAnswer --> Poll
 
-class Answer {
-  ObjectId id
+class QuestionAnswer {
   .. Fields ..
-  +string Title
-  +QType Type
-  +bool isRequired
-  +bool isHasStringAddition
+  +string Answer
 }
+Question <|-- QuestionAnswer
 
 class Direction {
-  ObjectId id
   .. Fields ..
   +bool isComplete
   .. Relations ..
   +ObjectId Poll
-  +ObjectId To
+  +ObjectId DirectedTo
 }
 Direction --> Employer
 Direction --> Poll
@@ -113,6 +120,19 @@ enum Role {
   User
   Reviewer
   Editor
+}
+
+enum TeamRole {
+  Developer
+  Analytic
+  ManualTester
+  AutomationTester
+  ProductOwner
+  ScrumMaster
+  TechnicalLead
+  TeamLead
+  ProjectManager
+  Chief
 }
 
 @enduml

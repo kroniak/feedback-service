@@ -14,4 +14,4 @@ ENV ASPNETCORE_URLS=http://+:5000
 EXPOSE 5000
 HEALTHCHECK --interval=10m --timeout=5s \
   CMD curl --fail http://localhost:5000/health/live || exit 1
-ENTRYPOINT ["dotnet", "WebApi.dll"] 
+ENTRYPOINT ["dotnet", "FeedBack.WebApi.dll"] 
