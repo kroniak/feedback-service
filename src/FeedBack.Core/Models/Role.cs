@@ -5,7 +5,7 @@ namespace FeedBack.Core.Models
     /// </summary>
     public enum Role
     {
-        Admin = 0,
+        Administrator = 0,
         User,
         Reviewer,
         Editor
