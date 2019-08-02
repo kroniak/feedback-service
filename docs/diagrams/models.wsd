@@ -39,7 +39,7 @@ class PollTemplate {
   .. Fields ..
   +string PollName
   +bool isPrivate
-  +bool isCondidatPoll
+  +bool isCandidatePoll
   +PollType PollType
   .. Relations ..
   +Question[] Questions
