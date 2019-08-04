@@ -42,7 +42,6 @@ namespace FeedBack.WebApi
             else
             {
                 app.UseHsts();
-                app.UseHttpsRedirection();
             }
 
             app.UseAuthentication();
