@@ -30,6 +30,6 @@ namespace FeedBack.Core.Models
         /// <summary>
         /// List of the question
         /// </summary>
-        public List<Question> Questions { get; set; }
+        public List<Question> TemplateQuestions { get; set; }
     }
 }

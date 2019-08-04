@@ -11,7 +11,7 @@ namespace FeedBack.Core.Models
         ///  User email
         /// </summary>
         public string UserName { get; set; }
-        
+
         /// <summary>
         /// Users hashed password 
         /// </summary>

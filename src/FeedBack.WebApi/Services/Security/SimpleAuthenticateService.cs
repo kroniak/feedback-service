@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using FeedBack.Core.Database.Interfaces;
 using FeedBack.Core.Models;
 using Microsoft.AspNetCore.Identity;
@@ -23,11 +22,10 @@ namespace FeedBack.WebApi.Services.Security
             IUserRepository userRepository,
             IConfiguration configuration)
         {
+            if (configuration == null) throw new ArgumentNullException(nameof(configuration));
             _userRepository = userRepository ?? throw new ArgumentNullException(nameof(userRepository));
 
-            var configuration1 = configuration ?? throw new ArgumentNullException(nameof(configuration));
-            var key = configuration1["AUTHKEY"];
-            _key = Encoding.ASCII.GetBytes(key);
+            _key = SecurityServicesExtensions.GetKeyEncoded(configuration);
         }
 
         /// <inheritdoc />
@@ -56,8 +54,7 @@ namespace FeedBack.WebApi.Services.Security
                     SecurityAlgorithms.HmacSha256Signature)
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
-            var result = tokenHandler.WriteToken(token);
-            return result;
+            return tokenHandler.WriteToken(token);
         }
 
         private static IEnumerable<Claim> GetUserRolesClaims(User user) =>

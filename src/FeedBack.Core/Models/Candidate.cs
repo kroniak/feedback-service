@@ -16,7 +16,7 @@ namespace FeedBack.Core.Models
         /// Candidate position
         /// </summary>
         public string Position { get; set; }
-        
+
         /// <summary>
         /// Interview Date
         /// </summary>

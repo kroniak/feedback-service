@@ -7,8 +7,28 @@ namespace FeedBack.Core.Models
     /// <summary>
     /// Poll in action model
     /// </summary>
-    public class Poll : PollTemplate
+    public class Poll : IdentityModel
     {
+        /// <summary>
+        /// Title
+        /// </summary>
+        public string Title { get; set; }
+
+        /// <summary>
+        /// Flag os a Poll is private
+        /// </summary>
+        public bool IsPrivate { get; set; }
+
+        /// <summary>
+        /// Flag is a Poll is candidate poll
+        /// </summary>
+        public bool IsCandidatePoll { get; set; }
+
+        /// <summary>
+        /// For future. Type of the poll
+        /// </summary>
+        public string PollType { get; set; }
+        
         /// <summary>
         /// Start Poll Date
         /// </summary>
@@ -22,8 +42,8 @@ namespace FeedBack.Core.Models
         /// <summary>
         /// List of the Question
         /// </summary>
-        public new List<Question> Questions { get; set; }
-        
+        public List<Question> Questions { get; set; }
+
         /// <summary>
         /// Link to Employer model
         /// </summary>

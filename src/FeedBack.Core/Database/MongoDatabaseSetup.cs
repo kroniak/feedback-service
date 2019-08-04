@@ -48,7 +48,7 @@ namespace FeedBack.Core.Database
                 new User
                 {
                     UserName = "admin",
-                    Roles = new[] {Role.Administrator}
+                    Roles = new[] {Role.Administrator, Role.User, Role.Editor, Role.Reviewer}
                 },
                 new User
                 {
@@ -94,7 +94,7 @@ namespace FeedBack.Core.Database
 
             var userIndexModel2 = new CreateIndexModel<User>(
                 Builders<User>.IndexKeys.Ascending(x => x.Employer),
-                optionsUnique);
+                optionsBackground);
 
             var employerIndexModel1 = new CreateIndexModel<Employer>(
                 Builders<Employer>.IndexKeys.Ascending(x => x.User),
