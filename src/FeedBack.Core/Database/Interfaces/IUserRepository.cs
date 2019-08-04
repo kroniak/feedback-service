@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using FeedBack.Core.Models;
 
 namespace FeedBack.Core.Database.Interfaces
@@ -7,6 +8,6 @@ namespace FeedBack.Core.Database.Interfaces
     /// </summary>
     public interface IUserRepository
     {
-        User GetSecureUser(string userName);
+        Task<User> GetSecureUserAsync(string userName);
     }
 }

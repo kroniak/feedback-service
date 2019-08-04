@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace FeedBack.WebApi.Services.Security
 {
     /// <summary>
@@ -11,6 +13,6 @@ namespace FeedBack.WebApi.Services.Security
         /// <param name="userName">UserName</param>
         /// <param name="password">Password not hashed</param>
         /// <returns>JWT Token if credential is valid</returns>
-        string CheckUserCredentials(string userName, string password);
+        Task<string> CheckUserCredentials(string userName, string password);
     }
 }

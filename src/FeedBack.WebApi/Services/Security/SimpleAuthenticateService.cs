@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading.Tasks;
 using FeedBack.Core.Database.Interfaces;
 using FeedBack.Core.Models;
 using Microsoft.AspNetCore.Identity;
@@ -29,9 +30,9 @@ namespace FeedBack.WebApi.Services.Security
         }
 
         /// <inheritdoc />
-        public string CheckUserCredentials(string userName, string password)
+        public async Task<string> CheckUserCredentials(string userName, string password)
         {
-            var user = _userRepository.GetSecureUser(userName);
+            var user = await _userRepository.GetSecureUserAsync(userName);
 
             if (user == null) return null;
 

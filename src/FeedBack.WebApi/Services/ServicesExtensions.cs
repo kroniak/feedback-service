@@ -2,6 +2,7 @@ using System;
 using System.Diagnostics.CodeAnalysis;
 using FeedBack.Core.Database;
 using FeedBack.Core.Database.Interfaces;
+using FeedBack.Core.Database.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace FeedBack.WebApi.Services

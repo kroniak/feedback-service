@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
+using System.Threading.Tasks;
 using FeedBack.WebApi.Models;
 using FeedBack.WebApi.Services.Security;
 using Microsoft.AspNetCore.Authorization;
@@ -46,7 +47,7 @@ namespace FeedBack.WebApi.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
         [AllowAnonymous]
-        public ActionResult<string> Login([FromBody] CredentialDto userDto)
+        public async Task<ActionResult<string>> Login([FromBody] CredentialDto userDto)
         {
             // try to validate user model
             if (!ModelState.IsValid)
@@ -56,7 +57,7 @@ namespace FeedBack.WebApi.Controllers
             }
 
             // try to verify user data
-            var token = _authenticateService.CheckUserCredentials(userDto.Username, userDto.Password);
+            var token = await _authenticateService.CheckUserCredentials(userDto.Username, userDto.Password);
 
             // ReSharper disable once InvertIf
             if (token == null)
