@@ -21,7 +21,7 @@ namespace FeedBack.Core.Database.Repositories
         {
             if (database == null) throw new ArgumentNullException(nameof(database));
             _cache = memoryCache ?? throw new ArgumentNullException(nameof(memoryCache));
-            _collection = database.GetCollection<User>(DbConstants.UserCollectionName);
+            Collection = database.GetCollection<User>(DbConstants.UserCollectionName);
         }
 
         /// <inheritdoc />
@@ -32,7 +32,7 @@ namespace FeedBack.Core.Database.Repositories
                 {
                     cacheEntry.SlidingExpiration = TimeSpan.FromMinutes(60);
                     var filter = Builders<User>.Filter.Eq(u => u.UserName, userName);
-                    var users = await _collection.Find(filter).ToListAsync();
+                    var users = await Collection.Find(filter).ToListAsync();
                     return users.FirstOrDefault();
                 }
             );
