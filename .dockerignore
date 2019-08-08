@@ -13,5 +13,6 @@ logs
 Dockerfile
 **/bin
 **/obj
-out
+**/out
 docs
+scripts

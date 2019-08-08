@@ -8,6 +8,6 @@ command -v docker >/dev/null 2>&1 || {
 
 SCRIPT_ROOT="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-docker build -t api.feedback-service.kroniak.net:latest "$SCRIPT_ROOT/.."
+docker build -t feedback-service.kroniak.net:latest "$SCRIPT_ROOT/.."
 
 docker rmi -f $(docker images -q --filter "dangling=true")
