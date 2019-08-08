@@ -2,10 +2,10 @@
 
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
+        <IsPackable>false</IsPackable>
     </PropertyGroup>
 
     <ItemGroup>
       <ProjectReference Include="..\FeedBack.Core\FeedBack.Core.csproj" />
     </ItemGroup>
-
 </Project>

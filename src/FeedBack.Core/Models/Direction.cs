@@ -11,12 +11,12 @@ namespace FeedBack.Core.Models
         /// Show opt not notification to user
         /// </summary>
         public bool IsComplete { get; set; }
-        
+
         /// <summary>
         /// Link to Poll
         /// </summary>
         public ObjectId Poll { get; set; }
-        
+
         /// <summary>
         /// Link to Employer
         /// </summary>

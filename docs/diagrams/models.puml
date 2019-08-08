@@ -53,7 +53,7 @@ class PollTemplate {
   +bool isCandidatePoll
   +string PollType
   .. Relations ..
-  +Question[] Questions
+  +Question[] TemplateQuestions
 }
 PollTemplate o-- Question
 

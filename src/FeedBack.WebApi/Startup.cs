@@ -1,4 +1,7 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using FeedBack.Core.Database;
+using FeedBack.WebApi.Services;
+using FeedBack.WebApi.Services.Security;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -18,6 +21,14 @@ namespace FeedBack.WebApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // configure db
+            services.AddMongoDb(_configuration);
+
+            // add repositories
+            services.AddMemoryCache();
+            services.AddRepositoryAndServices();
+            services.AddCustomAuthentication(_configuration);
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -31,9 +42,11 @@ namespace FeedBack.WebApi
             else
             {
                 app.UseHsts();
-                app.UseHttpsRedirection();
             }
-            
+
+            app.UseAuthentication();
+            app.UseCors();
+
             app.UseMvc();
         }
     }

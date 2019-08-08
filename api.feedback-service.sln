@@ -6,7 +6,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedBack.WebApi", "src\Feed
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedBack.Services", "src\FeedBack.Services\FeedBack.Services.csproj", "{89D28062-1CD3-470C-A765-F873995FD38F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedBack.WebApi.Test", "test\FeedBack.WebApi.Test\FeedBack.WebApi.Test.csproj", "{E473BFEB-4E4A-4A3E-B18B-B4FD9B19E971}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FeedBack.Test", "test\FeedBack.Test\FeedBack.Test.csproj", "{E473BFEB-4E4A-4A3E-B18B-B4FD9B19E971}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
