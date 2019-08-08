@@ -1,6 +1,6 @@
 using Xunit;
 
-namespace FeedBack.WebApi.Test
+namespace FeedBack.Test
 {
     public class UnitTest1
     {
