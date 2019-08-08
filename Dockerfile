@@ -3,13 +3,13 @@ FROM microsoft/dotnet:2.2-sdk AS build
 # copy
 WORKDIR /app
 COPY . .
-RUN dotnet restore -v m "api.feedback-service.sln"
-RUN ./scripts/test.sh && \
-  ./scripts/build.sh
+RUN dotnet restore -v m "server/api.feedback-service.sln"
+RUN ./server/scripts/test.sh && \
+  ./server/scripts/build.sh
 
 FROM microsoft/dotnet:2.2-aspnetcore-runtime AS runtime
 WORKDIR /app
-COPY --from=build /app/out ./
+COPY --from=build /app/server/out ./
 ENV ASPNETCORE_URLS=http://+:5000
 EXPOSE 5000
 HEALTHCHECK --interval=10m --timeout=5s \

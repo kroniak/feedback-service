@@ -12,4 +12,4 @@ echo "!!WARNING!! This script for pipeline test running and checking code covera
 
 dotnet test -c Release /p:CollectCoverage=true /p:Threshold=0 \
 /p:Exclude="[xunit.*]*" \
-"${SCRIPT_ROOT}/../test/FeedBack.WebApi.Test"
+"${SCRIPT_ROOT}/../test/FeedBack.Test"

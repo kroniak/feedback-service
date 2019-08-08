@@ -13,4 +13,4 @@ echo "!!WARNING!! This script runs tests and checks code coverage for netstandar
 dotnet test -c Release /p:CollectCoverage=true \
 /p:Exclude="[xunit.*]*" \
 /p:CoverletOutputFormat=lcov /p:CoverletOutput=../lcov \
-"${SCRIPT_ROOT}/../test/FeedBack.WebApi.Test"
+"${SCRIPT_ROOT}/../test/FeedBack.Test"
