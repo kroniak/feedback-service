@@ -1,0 +1,42 @@
+@startuml General Registration Flow
+box "UI WEB" #LightBlue
+	participant Client
+	participant VueUI
+end box
+box "api.feedback-service.kroniak.net" #LightYellow
+	participant "api.feedback-service" as api
+	participant ValidationService
+	participant RegistrationService
+	participant UserRepository
+end box
+autonumber
+Client -> VueUI : req /registration
+Client <- VueUI : ui res
+Client -> api : AJAX POST req /api/auth/registration
+activate api
+api -> ValidationService : validate dto INVOKE
+ValidationService -> api : validation res
+api --> Client: HTML code 400
+== Application Logic ==
+api -> RegistrationService : Registration Method INVOKE
+RegistrationService -> UserRepository : CheckUser Method INVOKE
+database Mongo
+UserRepository -> Mongo : User Search Request
+Mongo -> UserRepository : [User] or NULL
+UserRepository -> RegistrationService : CheckUser Method Result
+RegistrationService --> api : [FAIL]
+api --> Client: HTML code 400
+
+RegistrationService -> RegistrationService : Generate new [Password]
+RegistrationService -> UserRepository : Create new [User]
+UserRepository -> Mongo : User Added Request
+Mongo -> UserRepository : [User] or NULL
+UserRepository -> RegistrationService : Added Result
+RegistrationService --> api : [FAIL]
+api --> Client: HTML code 500
+RegistrationService -> MailSender : Send mail INVOKE
+MailSender ->] : AWS mail Send
+RegistrationService -> api : RegistrationService Response
+deactivate api
+api -> Client : AJAX POST res
+@enduml
