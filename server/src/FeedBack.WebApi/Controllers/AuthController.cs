@@ -36,13 +36,13 @@ namespace FeedBack.WebApi.Controllers
             _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         }
 
-        // POST /auth/login
+        // POST /api/auth/login
         /// <summary>
         /// Login user
         /// </summary>
         /// <returns>A `string` type with token</returns>
         /// <response code="200">Login user successfully</response>
-        [Route("/auth/login")]
+        [Route("/api/auth/login")]
         [HttpPost]
         [ProducesResponseType(typeof(string), StatusCodes.Status200OK)]
         [ProducesDefaultResponseType]
@@ -70,12 +70,12 @@ namespace FeedBack.WebApi.Controllers
             return Ok(new {token});
         }
 
-        // POST /auth/login
+        // POST /api/auth/verify
         /// <summary>
         /// Verify user JWT
         /// </summary>
         /// <response code="200">Login user successfully</response>
-        [Route("/auth/verify")]
+        [Route("/api/auth/verify")]
         [HttpGet]
         [ProducesResponseType(typeof(ActionResult), StatusCodes.Status200OK)]
         public ActionResult Verify()

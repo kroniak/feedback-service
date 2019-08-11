@@ -47,12 +47,12 @@ namespace FeedBack.Core.Database
             {
                 new User
                 {
-                    UserName = "admin",
+                    UserName = "admin@feedback-service",
                     Roles = new[] {Role.Administrator, Role.User, Role.Editor, Role.Reviewer}
                 },
                 new User
                 {
-                    UserName = "user",
+                    UserName = "user@feedback-service",
                     Roles = new[] {Role.User}
                 }
             };
